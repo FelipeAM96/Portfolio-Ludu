@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas Eduardo Assumção - Portfólio de Analista de BI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for playful yet professional icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 4px;
+            background-color: #6366f1; /* Indigo 500 */
+            border-radius: 9999px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1.5rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02); /* More pronounced lift and slight scale */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05); /* Larger shadow */
+        }
+        .icon-wrapper {
+            background-color: #e0e7ff; /* Indigo 100 */
+            border-radius: 9999px; /* rounded-full */
+            padding: 1rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Custom styles for Lucide icons */
+        .lucide {
+            width: 24px;
+            height: 24px;
+            color: #4f46e5; /* Indigo 600 */
+        }
+        .project-image {
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            object-fit: cover; /* Cover the area, crop if necessary */
+            border-radius: 1.5rem 1.5rem 0 0; /* rounded-xl top corners */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        /* Keyframe for floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        /* Removed float-animation from profile picture for a more professional look */
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
+            transform: translateY(-50px);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            overflow-y: auto; /* Enable scrolling for long content */
+            max-height: 90vh; /* Limit height to viewport height */
+        }
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4f46e5;
+        }
+
+        /* Scroll to top button */
+        #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed/sticky position */
+            bottom: 20px; /* Place the button at the bottom of the page */
+            right: 30px; /* Place the button 30px from the right */
+            z-index: 99; /* Make sure it does not overlap */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: #6366f1; /* Set a background color */
+            color: white; /* Text color */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 50%; /* Rounded corners */
+            font-size: 18px; /* Increase font size */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #4f46e5; /* Darker background on hover */
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <div class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+
+        <!-- Header Section -->
+        <header class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-8 mb-12 flex flex-col md:flex-row items-center justify-center text-center md:text-left">
+            <div class="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-indigo-200 flex items-center justify-center mb-6 md:mb-0 md:mr-8 border-4 border-indigo-400">
+                <!-- Profile Picture -->
+                <img src="https://media.licdn.com/dms/image/v2/D4D35AQE3jehaRcUtVw/profile-framedphoto-shrink_400_400/B4DZZj9po9GgAg-/0/1745433828213?e=1753210800&v=beta&t=whtdJYDi-4BWyhby5ABOXebn1shagimz75UUaizwgN0"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x400/818cf8/ffffff?text=Lucas';"
+                     alt="Foto de perfil de Lucas Eduardo Assumção"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 right-0 p-2 bg-indigo-500 rounded-full border-2 border-white">
+                    <i data-lucide="sparkles" class="lucide text-white w-6 h-6"></i>
+                </div>
+            </div>
+            <div>
+                <h1 class="text-5xl font-extrabold text-indigo-800 mb-2 leading-tight">Lucas Eduardo Assumção</h1>
+                <p class="text-2xl text-gray-600 font-medium">Analista de Inteligência de Negócios & Dados</p>
+                <p class="mt-4 text-gray-700 max-w-2xl mx-auto md:mx-0">Transformando dados complexos em insights acionáveis e histórias visuais impactantes.</p>
+            </div>
+        </header>
+
+        <!-- About Me Section -->
+        <section id="about" class="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-6 section-title">Sobre Mim</h2>
+            <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="icon-wrapper">
+                        <i data-lucide="brain" class="lucide w-12 h-12"></i>
+                    </div>
+                </div>
+                <div class="md:w-2/3 text-lg leading-relaxed text-gray-700">
+                    <p class="mb-4">Olá! Sou Lucas Eduardo Assumção, um Analista de Inteligência de Negócios apaixonado por desvendar os segredos ocultos nos dados. Minha missão é transformar números brutos em narrativas claras e estratégias inteligentes que impulsionam o crescimento e a inovação.</p>
+                    <p>Com uma abordagem curiosa e analítica, utilizo ferramentas e técnicas avançadas para construir dashboards intuitivos, relatórios precisos e modelos preditivos que capacitam as empresas a tomar decisões baseadas em evidências. Adoro a jornada de explorar dados, encontrar padrões e apresentar descobertas de forma envolvente e compreensível para todos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-8 section-title">Minhas Habilidades</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Skill Card 1: SQL -->
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="icon-wrapper mb-4">
+                        <i data-lucide="database" class="lucide w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">SQL & Modelagem de Dados</h3>
+                    <p class="text-gray-600">Extração, transformação e carregamento de dados (ETL), otimização de consultas e design de bancos de dados.</p>
+                </div>
+                <!-- Skill Card 2: Python -->
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="icon-wrapper mb-4">
+                        <i data-lucide="code" class="lucide w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Python (Pandas, NumPy)</h3>
+                    <p class="text-gray-600">Análise de dados, automação, limpeza e manipulação de grandes volumes de informações.</p>
+                </div>
+                <!-- Skill Card 3: Power BI -->
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="icon-wrapper mb-4">
+                        <i data-lucide="layout-dashboard" class="lucide w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Power BI</h3>
+                    <p class="text-gray-600">Criação de dashboards interativos, relatórios dinâmicos e modelos de dados robustos.</p>
+                </div>
+                <!-- Skill Card 4: Tableau -->
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="icon-wrapper mb-4">
+                        <i data-lucide="bar-chart-2" class="lucide w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Tableau</h3>
+                    <p class="text-gray-600">Visualização de dados avançada e storytelling com dados para insights claros.</p>
+                </div>
+                <!-- Skill Card 5: Excel Avançado -->
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="icon-wrapper mb-4">
+                        <i data-lucide="clipboard-list" class="lucide w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Excel Avançado</h3>
+                    <p class="text-gray-600">Funções complexas, tabelas dinâmicas, macros VBA e automação de planilhas.</p>
+                </div>
+                <!-- Skill Card 6: Análise Estatística -->
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="icon-wrapper mb-4">
+                        <i data-lucide="sigma" class="lucide w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Análise Estatística</h3>
+                    <p class="text-gray-600">Aplicação de métodos estatísticos para identificar tendências, padrões e correlações.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-8 section-title">Meus Projetos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project Card 1 -->
+                <div class="card overflow-hidden">
+                    <button class="open-modal w-full" data-project-id="project1">
+                        <img src="https://placehold.co/600x400/818cf8/ffffff?text=Dashboard+Vendas"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/818cf8/ffffff?text=Dashboard+Vendas';"
+                             alt="Imagem do Projeto de Dashboard de Vendas" class="project-image">
+                    </button>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Otimização de Vendas com Power BI</h3>
+                        <p class="text-gray-600 mb-4">Desenvolvimento de um dashboard interativo para acompanhar métricas de vendas, identificar gargalos e prever tendências futuras, resultando em um aumento de 15% na eficiência das campanhas.</p>
+                        <button class="open-modal text-indigo-600 hover:text-indigo-800 font-medium flex items-center" data-project-id="project1">
+                            Ver Projeto <i data-lucide="arrow-right" class="lucide ml-2 w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="card overflow-hidden">
+                    <button class="open-modal w-full" data-project-id="project2">
+                        <img src="https://placehold.co/600x400/93c5fd/ffffff?text=Analise+Churn+Python"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/93c5fd/ffffff?text=Analise+Churn+Python';"
+                             alt="Imagem do Projeto de Análise de Churn com Python" class="project-image">
+                    </button>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Análise Preditiva de Churn com Python</h3>
+                        <p class="text-gray-600 mb-4">Criação de um modelo em Python para prever a probabilidade de churn de clientes, permitindo intervenções proativas e redução de 10% na taxa de desistência.</p>
+                        <button class="open-modal text-indigo-600 hover:text-indigo-800 font-medium flex items-center" data-project-id="project2">
+                            Ver Projeto <i data-lucide="arrow-right" class="lucide ml-2 w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="card overflow-hidden">
+                    <button class="open-modal w-full" data-project-id="project3">
+                        <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Relatorio+Financeiro+Tableau"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/a78bfa/ffffff?text=Relatorio+Financeiro+Tableau';"
+                             alt="Imagem do Projeto de Relatório Financeiro com Tableau" class="project-image">
+                    </button>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Relatório Financeiro Interativo no Tableau</h3>
+                        <p class="text-gray-600 mb-4">Construção de um relatório financeiro detalhado no Tableau, oferecendo uma visão 360º das finanças da empresa e facilitando a identificação de áreas de melhoria.</p>
+                        <button class="open-modal text-indigo-600 hover:text-indigo-800 font-medium flex items-center" data-project-id="project3">
+                            Ver Projeto <i data-lucide="arrow-right" class="lucide ml-2 w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Project Card 4 -->
+                <div class="card overflow-hidden">
+                    <button class="open-modal w-full" data-project-id="project4">
+                        <img src="https://placehold.co/600x400/c4b5fd/ffffff?text=Automatizacao+SQL"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/c4b5fd/ffffff?text=Automatizacao+SQL';"
+                             alt="Imagem do Projeto de Automação de Relatórios com SQL" class="project-image">
+                    </button>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Automação de Relatórios com SQL</h3>
+                        <p class="text-gray-600 mb-4">Implementação de scripts SQL para automatizar a geração de relatórios diários, economizando horas de trabalho manual e garantindo a consistência dos dados.</p>
+                        <button class="open-modal text-indigo-600 hover:text-indigo-800 font-medium flex items-center" data-project-id="project4">
+                            Ver Projeto <i data-lucide="arrow-right" class="lucide ml-2 w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="w-full max-w-4xl bg-white rounded-3xl shadow-xl p-8 mb-12 text-center">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-8 section-title">Vamos Conectar!</h2>
+            <p class="text-lg text-gray-700 mb-6">Se você tem um projeto em mente, uma pergunta ou apenas quer conversar sobre dados, sinta-se à vontade para entrar em contato.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="mailto:seu.email@example.com" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out flex items-center shadow-lg">
+                    <i data-lucide="mail" class="lucide mr-2 w-5 h-5 text-white"></i> Enviar E-mail
+                </a>
+                <a href="https://www.linkedin.com/in/lucas-eduardo-assumcao/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out flex items-center shadow-lg">
+                    <i data-lucide="linkedin" class="lucide mr-2 w-5 h-5 text-white"></i> LinkedIn
+                </a>
+                <!-- Optional: GitHub or other relevant links -->
+                <a href="https://github.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out flex items-center shadow-lg">
+                    <i data-lucide="github" class="lucide mr-2 w-5 h-5 text-white"></i> GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full max-w-4xl text-center text-gray-600 text-sm mt-8">
+            <p>&copy; 2024 Lucas Eduardo Assumção. Todos os direitos reservados.</p>
+            <p class="mt-2">Feito com <i data-lucide="heart" class="lucide inline-block w-4 h-4 text-red-500"></i> e Dados.</p>
+        </footer>
+
+    </div>
+
+    <!-- Project Modal Structure -->
+    <div id="projectModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="closeModalBtn">&times;</button>
+            <h3 id="modalTitle" class="text-3xl font-bold text-indigo-700 mb-4"></h3>
+            <p id="modalDescription" class="text-gray-700 text-lg mb-4"></p>
+            <img id="modalImage" src="" alt="Imagem do Projeto" class="w-full h-auto rounded-lg mb-4">
+            <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center justify-center">
+                Ver Projeto Completo <i data-lucide="external-link" class="lucide ml-2 w-5 h-5"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Voltar ao Topo">
+        <i data-lucide="arrow-up" class="lucide text-white"></i>
+    </button>
+
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Project Modal Logic
+        const projectModal = document.getElementById('projectModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalImage = document.getElementById('modalImage');
+        const modalLink = document.getElementById('modalLink');
+
+        // Sample project data (replace with your actual project details)
+        const projectsData = {
+            project1: {
+                title: "Otimização de Vendas com Power BI - Detalhes",
+                description: "Este projeto focou na criação de um dashboard robusto no Power BI para monitorar o desempenho de vendas em tempo real. Implementamos métricas chave, como taxa de conversão, valor médio de transação e desempenho por canal, permitindo que a equipe de vendas identificasse rapidamente oportunidades e gargalos. O resultado foi um aumento de 15% na eficiência das campanhas de vendas e uma melhor alocação de recursos.",
+                image: "https://placehold.co/800x500/818cf8/ffffff?text=Dashboard+Vendas+Detalhes",
+                link: "#" // Replace with actual project link
+            },
+            project2: {
+                title: "Análise Preditiva de Churn com Python - Detalhes",
+                description: "Neste projeto, desenvolvemos um modelo de Machine Learning (usando Python com Pandas e Scikit-learn) para prever a probabilidade de churn de clientes. Analisamos fatores como histórico de compras, interações com o suporte e dados demográficos para identificar clientes em risco. A implementação do modelo permitiu intervenções proativas, como ofertas personalizadas e suporte direcionado, resultando em uma redução de 10% na taxa de desistência de clientes.",
+                image: "https://placehold.co/800x500/93c5fd/ffffff?text=Analise+Churn+Python+Detalhes",
+                link: "#" // Replace with actual project link
+            },
+            project3: {
+                title: "Relatório Financeiro Interativo no Tableau - Detalhes",
+                description: "Este projeto envolveu a construção de um relatório financeiro abrangente e interativo no Tableau. O objetivo era fornecer uma visão 360º das finanças da empresa, incluindo receitas, despesas, margens de lucro e fluxo de caixa. Com filtros dinâmicos e visualizações claras, os gestores puderam explorar os dados em diferentes níveis de granularidade, facilitando a identificação de áreas de melhoria e otimização de custos.",
+                image: "https://placehold.co/800x500/a78bfa/ffffff?text=Relatorio+Financeiro+Tableau+Detalhes",
+                link: "#" // Replace with actual project link
+            },
+            project4: {
+                title: "Automação de Relatórios com SQL - Detalhes",
+                description: "Neste projeto, implementamos uma solução para automatizar a geração de relatórios diários utilizando scripts SQL complexos. O processo manual de coleta e consolidação de dados era demorado e propenso a erros. Com a automação, reduzimos o tempo de geração de relatórios em 80%, garantindo a consistência dos dados e liberando a equipe para tarefas mais estratégicas. A solução incluiu a criação de stored procedures e views otimizadas.",
+                image: "https://placehold.co/800x500/c4b5fd/ffffff?text=Automatizacao+SQL+Detalhes",
+                link: "#" // Replace with actual project link
+            }
+        };
+
+        // Event listeners for opening the modal (both button and image)
+        document.querySelectorAll('.open-modal').forEach(element => {
+            element.addEventListener('click', (event) => {
+                // Find the closest parent with data-project-id to ensure we get the correct project
+                const projectId = event.currentTarget.dataset.projectId || event.currentTarget.closest('.card').querySelector('[data-project-id]').dataset.projectId;
+                const project = projectsData[projectId];
+
+                if (project) {
+                    modalTitle.textContent = project.title;
+                    modalDescription.textContent = project.description;
+                    modalImage.src = project.image;
+                    modalLink.href = project.link;
+                    projectModal.classList.add('open');
+                }
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            projectModal.classList.remove('open');
+        });
+
+        // Close modal if clicked outside content
+        projectModal.addEventListener('click', (event) => {
+            if (event.target === projectModal) {
+                projectModal.classList.remove('open');
+            }
+        });
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

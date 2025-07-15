@@ -12,11 +12,29 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
-            /* Updated background to a subtle gradient for more color */
-            background: linear-gradient(to bottom right, #e0f2fe, #e8eaf6); /* Light blue to light indigo gradient */
+            /* Background image with cover and fixed attachment */
+            background-image: url('https://t4.ftcdn.net/jpg/01/78/96/55/360_F_178965562_fUsTYdEJU0zCf7dlyTojrXGrVPAwlMoH.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Makes the background stay fixed when scrolling */
             font-family: 'Inter', sans-serif;
             color: #2d3748; /* Darker gray for better contrast */
+            position: relative; /* Needed for pseudo-element positioning */
+            z-index: 1; /* Ensure content is above the overlay */
         }
+
+        /* Overlay for opacity effect on the background image */
+        body::before {
+            content: '';
+            position: fixed; /* Fixed position to cover the entire viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(224, 242, 254, 0.7); /* Light blue with 70% opacity */
+            z-index: -1; /* Place behind the content */
+        }
+
         .section-title {
             position: relative;
             display: inline-flex; /* Changed to inline-flex to align icon with text */
@@ -157,7 +175,7 @@
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
     <div class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
 
         <!-- Header Section -->
@@ -185,7 +203,6 @@
                 Sobre Mim <i data-lucide="user-check" class="lucide-title-icon"></i>
             </h2>
             <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
-                <!-- Removed the icon wrapper div from here -->
                 <div class="md:w-full text-lg leading-relaxed text-gray-700">
                     <p class="mb-4">Olá! Sou Lucas Eduardo Assumção, um Analista de Inteligência de Negócios apaixonado por desvendar os segredos ocultos nos dados e transformá-los em insights acionáveis. Busco experiências desafiadoras nas áreas de marketing, dados ou produtos, com o objetivo de contribuir para empresas com propósitos bem definidos e aprender significativamente.</p>
                     <p class="mb-4">Tenho facilidade em identificar áreas de melhoria e estruturar processos, com um perfil naturalmente líder, organizado, criativo, comunicativo, proativo, curioso, otimista e com bom senso crítico. Estou constantemente buscando oportunidades para desenvolver e aprender novas habilidades, com a capacidade de entender rapidamente novos conceitos.</p>
